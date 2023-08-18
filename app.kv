@@ -1,0 +1,59 @@
+# Create your Kivy layout in the kv language here
+BoxLayout:
+    orientation: "horizontal"
+    BoxLayout:
+        orientation: "vertical"
+        size_hint_x: 0.25
+        Label:
+            text: "Sort by:"
+        Spinner:
+            id: sort_selection
+            text: app.current_sort
+            values: app.sort_codes
+            on_text: app.sort_book_widget()
+        Label:
+            text: "Add new Book..."
+        Label:
+            text: "Title:"
+        TextInput:
+            id: input_title
+            text: ''
+            write_tab: False
+        Label:
+            text: "Author:"
+        TextInput:
+            id: input_author
+            text: ''
+            write_tab: False
+        Label:
+            text: "Pages:"
+        TextInput:
+            id: input_pages
+            text: ''
+            write_tab: False
+        Button:
+            text: "Add Book"
+            on_release: app.add_new_book(input_title.text, input_author.text, input_pages.text)
+        Button:
+            text: "Clear"
+            on_release: app.clear_text()
+
+    BoxLayout:
+        orientation: "vertical"
+        size_hint_x: 0.75
+        BoxLayout:
+            size_hint_y: 0.08
+            Label:
+                size: (0.5,0.5)
+                text: app.page_left
+
+        BoxLayout:
+            id: book_button_box
+            orientation: "vertical"
+            size_hint_y: 0.84
+
+        BoxLayout:
+            size_hint_y: 0.08
+            Label:
+                pos: (0,0)
+                text: app.status_text
